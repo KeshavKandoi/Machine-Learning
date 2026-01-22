@@ -1,0 +1,10 @@
+{
+  "name": "keshav",
+  "age":  25,
+  "address": {
+    "country":"india",
+    "state":"jharkhand"
+  },
+  "subject":["python","frontend","Backened"]
+}
+

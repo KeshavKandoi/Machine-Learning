@@ -1,0 +1,31 @@
+[
+  {
+    "name": "priya",
+    "age": 25,
+    "rating": 4.5,
+    "feedback": "Very helpful and easy to understand"
+  },
+  {
+    "name": "Amit",
+    "rating": 4.0,
+    "feedback": "Good explanation but needs more examples"
+  },
+  {
+    "name": "Neha",
+    "age": 24,
+    "rating": 4.8,
+    "feedback": "Excellent content and clear teaching"
+  },
+  {
+    "name": "Rahul",
+    "age": 27,
+    "rating": "Three",
+    "feedback": "Concepts are good but pace is fast"
+  },
+  {
+    "name": "Priya",
+    "age": 23,
+    "rating": 4.6,
+    "feedback": "Very informative and well structured"
+  }
+]

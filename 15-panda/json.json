@@ -1,0 +1,7 @@
+{
+  "students": [
+    {"id": 1, "name": "Karan", "cgpa": 9.5},
+    {"id": 2, "name": "Harsh", "cgpa": 7.0},
+    {"id": 3, "name": "Shivam", "cgpa": 9.0}
+  ]
+}

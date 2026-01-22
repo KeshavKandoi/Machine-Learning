@@ -1,0 +1,13 @@
+id,name,age,country,gender
+1,Amit Kumar,21,India,Male
+2,Riya,22,India,Female
+3,Rahul,23,USA,Male
+4,Neha,21,Female
+2,Riya,22,India,Female
+5,John,25,USA,Male
+6,Anita,24,India,Female
+3,Rahul,,USA,Male
+7,Ali,26,UAE,Male
+8,Sara,22,UK,Female
+1,Amit,21,India,Male
+9,Karan,23,India,Male
