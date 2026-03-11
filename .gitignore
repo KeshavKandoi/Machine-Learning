@@ -3,3 +3,11 @@ venv/
 __pycache__/
 *.pyc
 tempCodeRunnerFile.py
+venv/
+.venv/
+05.1venv/
+08-virtual_py/
+.env
+__pycache__/
+*.pyc
+tempCodeRunnerFile.py
