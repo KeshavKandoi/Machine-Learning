@@ -19,3 +19,8 @@ def chat(message:str=Body(...,description='Chat Message')):
   }
   ])
   return response['message']['content'] 
+
+
+
+
+

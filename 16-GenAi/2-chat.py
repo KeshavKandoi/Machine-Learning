@@ -2,32 +2,26 @@
 # python -m venv venv
 # source venv/bin/activate
 
-# ONE SHOT PROMPTING 
+# ZERO SHOT PROMPTING
 
-
+# CODE in OPENAI but api key=gemini
 
 import os
 from dotenv import load_dotenv
+from openai import OpenAI
 
-from google import genai
-from google.genai import types
+load_dotenv()
 
-load_dotenv() 
-
-client = genai.Client(api_key=os.getenv("API_KEY"))
-
-
-system_prompt="""
-YOU ARE THE AI ASSISTANT WHICH SOLVES ONLY MATHEMATICAL QUESTION . EXPLAIN THE QUESTION IN DETAIL 
-EX-2+2=4
-2,2,4 ARE REAL NUMBER .WE ARE  ADDING 2+2 .
-IF SOMEONE ASK OTHER DOMAIN QUESTION WRITE THIS IS NOT MY DOMAIN 
-"""
-
-response = client.models.generate_content(
-    model='gemini-2.5-flash', contents='30+3?',
-    config={
-        "system_instruction": system_prompt
-    }
+client = OpenAI(
+    api_key=os.getenv("API_KEY"),  # your Gemini API key
+    base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
 )
-print(response.text)
+
+response = client.chat.completions.create(
+    model="gemini-2.5-flash",
+    messages=[
+        {"role": "user", "content": "Who is Modi?"}
+    ]
+)
+
+print(response.choices[0].message.content)

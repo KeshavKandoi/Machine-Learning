@@ -6,6 +6,8 @@
 
 # ZERO SHORT PROMPTING
 
+# code in  gemini 
+
 import os
 from dotenv import load_dotenv
 
