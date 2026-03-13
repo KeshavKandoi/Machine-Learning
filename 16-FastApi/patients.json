@@ -1,0 +1,59 @@
+{
+  "patients": [
+    {
+      "patient_id": "P001",
+      "name": "Rahul Sharma",
+      "age": 34,
+      "gender": "Male",
+      "height": 175,
+      "weight": 78,
+      "bmi": 25.5,
+      "disease": "Diabetes",
+      "city": "Delhi"
+    },
+    {
+      "patient_id": "P002",
+      "name": "Priya Verma",
+      "age": 29,
+      "gender": "Female",
+      "height": 162,
+      "weight": 60,
+      "bmi": 22.9,
+      "disease": "Hypertension",
+      "city": "Mumbai"
+    },
+    {
+      "patient_id": "P003",
+      "name": "Amit Patel",
+      "age": 45,
+      "gender": "Male",
+      "height": 170,
+      "weight": 85,
+      "bmi": 29.4,
+      "disease": "Asthma",
+      "city": "Ahmedabad"
+    },
+    {
+      "patient_id": "P004",
+      "name": "Sneha Gupta",
+      "age": 38,
+      "gender": "Female",
+      "height": 165,
+      "weight": 70,
+      "bmi": 25.7,
+      "disease": "Thyroid",
+      "city": "Bangalore"
+    },
+    {
+      "patient_id": "P005",
+      "name": "Rohan Mehta",
+      "age": 52,
+      "gender": "Male",
+      "height": 178,
+      "weight": 90,
+      "bmi": 28.4,
+      "disease": "Heart Disease",
+      "city": "Pune"
+    }
+  ]
+}
