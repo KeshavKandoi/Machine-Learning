@@ -59,3 +59,8 @@ def sort_patients(sort_by:str=Query(...,description='Sort on the basic of height
   sorted_data=sorted(data["patients"],key=lambda x:x.get(sort_by,0),reverse=sort_order)
 
   return sorted_data
+    
+
+
+
+
