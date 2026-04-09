@@ -98,7 +98,18 @@ if user_input:
 
 
     
-    CONFIG = {'configurable': {'thread_id': st.session_state['thread_id']}}
+    # CONFIG = {'configurable': {'thread_id': st.session_state['thread_id']}}
+
+# Adding this with langsmith thread by this code otherwise use 
+# CONFIG = {'configurable': {'thread_id': st.session_state['thread_id']}}
+
+    CONFIG = {
+        "configurable": {"thread_id": st.session_state["thread_id"]},
+        "metadata": {
+            "thread_id": st.session_state["thread_id"]
+        },
+        "run_name": "chat_turn",
+    }
 
     
     # first add the message to message_history
