@@ -1,0 +1,62 @@
+DOCKER
+
+Docker is an open-source platform designed to automate the deployment, scaling and management of applications using containerisation technology. It enables applications to run consistently across different computing environments by packaging them with all their dependencies.
+
+Docker Image
+
+A Docker image is a blueprint or template used to create containers.
+
+Characteristics:
+* * Contains application code, runtime, libraries and dependencies.
+* * Built in layers using a Dockerfile.
+* * Cannot be modified once created (immutability).
+* * Can be shared and reused across systems.
+
+Docker Container
+
+A Docker Container is a runtime instance of a Docker image.
+
+Characteristics:
+* * Lightweight and efficient.
+* * Isolated from other containers and the host system.
+* * Includes everything required to run the application.
+* * Can be started, stopped, moved and deleted.
+
+DOCKERFILE
+
+A Dockerfile is a text file containing a sequence of instructions used to build a Docker image.
+
+Functions:
+* * Specifies the base image.
+* * Defines environment configuration.
+* * Installs dependencies.
+* * Sets execution commands.
+
+DOCKER ENGINE
+
+The Docker Engine is the core runtime system that enables Docker functionality.
+
+Components:
+* * Docker Daemon: Executes container operations.
+* * Docker CLI: Command-line interface for user interaction.
+* * REST API: Enables communication between components.
+
+DOCKER HUB
+
+Docker Hub is a cloud-based repository used for storing and distributing Docker images.
+
+Functions:
+* * Provides access to official and community images.
+* * Allows developers to upload and share images.
+* * Facilitates version control and collaboration.
+
+
+
+
+To upload docker image in DockerHub make Dockerfile
+
+run
+
+docker build -t kakandoi/table .             kakandoi/table is the name of file
+
+ docker run -p 8888:5000 kkandoi/table      8888 port number 
