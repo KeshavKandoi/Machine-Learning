@@ -59,4 +59,6 @@ run
 
 docker build -t kakandoi/table .             kakandoi/table is the name of file
 
- docker run -p 8888:5000 kkandoi/table      8888 port number 
+ docker run -p 8888:5000 kakandoi/table      8888 port number 
+
+
