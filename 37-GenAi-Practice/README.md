@@ -2,13 +2,13 @@
 
 Simple chatbot using Ollama and Python.
 
-## Installation
+## 🛠️ Installation
 
 ```bash
 pip install ollama
 ```
 
-## Run
+## ▶️ Run
 
 ```bash
 ollama run llama3
