@@ -4,16 +4,20 @@ from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.tools import tool
 from langchain_community.tools import DuckDuckGoSearchRun
-from langgraph.checkpoint.memory import InMemorySaver  
+from langgraph.checkpoint.memory import InMemorySaver 
+from typing_extensions import TypedDict
 import requests
 import json
 import datetime
+from langchain_ollama import ChatOllama
 
 load_dotenv()
 
 checkpointer = InMemorySaver()
 
-model = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
+model1 = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
+
+model2 = ChatOllama(model="qwen:7b")
 
 
 
@@ -37,7 +41,7 @@ def get_stock_price(symbol: str) -> str:
 tools = [search_tool, get_stock_price]
 
 
-llm_with_tools = model.bind_tools(tools)
+llm_with_tools = model1.bind_tools(tools)
 
 
 tool_node = ToolNode(tools)
@@ -65,25 +69,68 @@ graph.add_conditional_edges("llm", tools_condition)
 graph.add_edge("tools", "llm")
 
 
-workflow = graph.compile(checkpointer=checkpointer)
+workflow1 = graph.compile()
+
+
+
+class parentClass(TypedDict):
+   question: str
+   research: str    # filled by Agent 1
+   report: str
+
+def research(state:parentClass)->parentClass:
+   question=state["question"]
+   prompt1=f"research about the question {question} and give the description"
+   response=workflow1.invoke(
+       {"messages": [{"role": "user", "content": prompt1}]}
+  )
+   last = response["messages"][-1].content
+   if isinstance(last, list):
+        research_text = last[0]["text"]
+   else:
+        research_text = last
+   
+
+   return {"research":research_text}
+
+
+def report(state:parentClass)->parentClass:
+   research=state["research"]
+   prompt2 = f"Give a 5 bullet point report in ENGLISH ONLY about:\n{research}"
+
+   report=model2.invoke(prompt2).content
+   return{"report":report}
+
+
+graph = StateGraph(parentClass)
+
+graph.add_node("research",research)
+graph.add_node("report",report)
+
+graph.add_edge(START, "research")
+graph.add_edge("research","report")
+graph.add_edge("report",END)
+
+
+workflow2 = graph.compile(checkpointer=checkpointer)
+
+
+
+
 
 while True:
 
   prompt=input("enter your message-:")
 
-  result = workflow.invoke({
-      "messages": [
-          {"role": "user", "content": prompt}]}
-          ,{"configurable": {"thread_id": "1"}},
+  result = workflow2.invoke(
+           
+           {"question":prompt},
+          {"configurable": {"thread_id": "1"}},
   )
 
-  last = result["messages"][-1].content
-  if isinstance(last, list):
-    answer = last[0]["text"]
-  else:
-    answer = last
-
+  answer = result["report"]
   print(answer)
+
   approval = input("Save this answer? (yes/no): ")
 
   if approval.lower() == "yes":
@@ -100,6 +147,9 @@ while True:
       f.write("\n")   
 
   else:
-      print("kipped — not saved.")
+      print("skipped — not saved.")
 
 
+
+
+   
