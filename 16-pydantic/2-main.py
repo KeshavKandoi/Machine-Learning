@@ -58,4 +58,5 @@ It tells Pydantic:
 
 "Whenever someone provides a value for this field, call this function before accepting the value."
 
-For example:"""
+We use @classmethod because validators are executed before the model instance exists, so there is no self. Instead, the validator receives the class (cls) and the field value.
+"""
