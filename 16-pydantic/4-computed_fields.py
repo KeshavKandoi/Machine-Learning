@@ -41,3 +41,8 @@ patient1=Patient(**patient_info)
 
 
 insert_patient_data(patient1)
+
+"""
+@computed_field is used to create a field whose value is calculated from other fields instead of being provided by the user. It avoids recalculating the same value multiple times and allows the computed value to be included in the Pydantic model's output, such as model_dump() or JSON. In the BMI example, the user provides only weight and height, and Pydantic automatically computes the BMI.
+
+"""
