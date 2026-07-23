@@ -50,3 +50,12 @@ patient1=Patient(**patient_info)
 
 
 insert_patient_data(patient1)
+
+"""
+@field_validator is a decorator provided by Pydantic.
+
+It tells Pydantic:
+
+"Whenever someone provides a value for this field, call this function before accepting the value."
+
+For example:"""
