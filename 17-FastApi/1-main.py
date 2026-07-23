@@ -28,7 +28,14 @@ def view():
 
 
 @app.get("/patient/{patient_id}")
-def view_patient(patient_id:str=Path(...,description="ID of the patient in the DB",example="P001")):
+def view_patient(
+  patient_id:str=Path(
+    ...,
+    description="ID of the patient in the DB",
+    example="P001")):
+
+  # ... (three dots) is called Ellipsis in Python.
+
   data=load_data()
 
   for patient in data["patients"]:
@@ -40,7 +47,10 @@ def view_patient(patient_id:str=Path(...,description="ID of the patient in the D
 
 
 @app.get("/sort")
-def sort_patients(sort_by:str=Query(...,description='Sort on the basic of height,weight or bmi'),order:str=Query('asc',description='sort in asc or desc order')):
+def sort_patients(
+  sort_by:str=Query(...,
+                    description='Sort on the basic of height,weight or bmi')
+  ,order:str=Query('asc',description='sort in asc or desc order')):
 
   valid_fields=['height','weight','bmi']
 
@@ -64,3 +74,14 @@ def sort_patients(sort_by:str=Query(...,description='Sort on the basic of height
 
 
 
+# FastAPI is a modern Python web framework used to build APIs quickly and efficiently. It is built on top of Starlette and Pydantic.
+
+# HTTPException is used to return HTTP errors like 404 Not Found or 400 Bad Request with a custom message.
+
+
+"""
+Ellipsis (...) in FastAPI
+... (Ellipsis) means the parameter is required.
+If a parameter must be provided by the client, we use ....
+If a parameter is optional or has a default value, we do not use ...; instead, we provide the default value.
+"""
