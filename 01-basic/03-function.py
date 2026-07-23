@@ -5,3 +5,6 @@ print(function(1,2,3))
 print(function(1,2,3,5,6,7,))
 print(function(1,2,3,86,5,4))
 print(function(1,2,3,9,87654,432,3456,7))
+
+
+# *args lets a function accept any number of positional arguments, instead of a fixed number.
