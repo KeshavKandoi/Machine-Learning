@@ -145,6 +145,7 @@ def update_patient(patient_id: str, patient_update: PatientUpdate):
         patient_found[key] = value
 
     patient_obj = Patient(**patient_found)
+    # The ** operator unpacks the dictionary into keyword arguments.
 
     updated_patient = patient_obj.model_dump()
 
