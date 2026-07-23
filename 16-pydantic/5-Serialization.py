@@ -50,9 +50,21 @@ insert_patient_data(patient1)
 # dict k liye
 
 
-temp=patient1.model_dump.json()
+temp=patient1.model_dump_json()
 
 print(temp)
 print(type(temp))
 
 # json k liye
+
+
+""" model_dump()
+
+It converts the Pydantic model into a Python dictionary.
+
+--------
+
+model_dump_json()
+
+It converts the model into a JSON string.
+"""
