@@ -30,3 +30,14 @@ patient1=Patient(**patient_info)
 
 
 insert_patient_data(patient1)
+
+
+
+
+
+
+# BaseModel is the base class for creating Pydantic models.
+
+"""
+BaseModel is used to create Pydantic models. EmailStr validates email addresses. Field is used to add validation rules like minimum length or value limits. field_validator lets us write custom validation logic. From the typing module, List defines a list, Dict defines a dictionary, Optional makes a field optional, and Annotated combines a type with additional validation metadata.
+"""
