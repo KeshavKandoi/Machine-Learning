@@ -39,3 +39,7 @@ patient1=Patient(**patient_info)
 
 
 insert_patient_data(patient1)
+
+
+
+# We use model_validator when validation depends on more than one field. It validates the entire model after all fields are available. For example, checking that password and confirm_password match or that end_date is after start_date. For validating a single field, we use field_validator.
