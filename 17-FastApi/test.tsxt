@@ -1,0 +1,133 @@
+What is FastAPI, and why would you choose it over Flask or Django?
+
+FastAPI is a modern Python web framework used to build REST APIs. It is fast, easy to use, and built on top of Starlette and Pydantic. I prefer FastAPI over Flask because it provides automatic request validation using Pydantic, automatic API documentation with Swagger UI, better support for asynchronous programming, and requires less boilerplate code.
+
+What is Pydantic, and how does FastAPI use it?
+
+Pydantic is a Python library used for data validation and data parsing. It uses Python type hints to check whether the incoming data is correct. If possible, it automatically converts compatible data types, and if the data is invalid, it raises a validation error. FastAPI uses Pydantic to validate request and response data automatically.
+
+What is the difference between a Path Parameter and a Query Parameter?
+
+A path parameter is part of the URL path and is used to identify a specific resource. For example, in /patient/P001, P001 is the path parameter.
+
+A query parameter is written after the ? in the URL and is used to filter, sort, or search data. For example, /sort?sort_by=height&order=asc, where sort_by and order are query parameters.
+
+What is the difference between PUT and POST?
+
+POST is used to create a new resource, while PUT is used to update an existing resource. For example, we use POST to create a new patient record and PUT to update an existing patient's details.
+
+
+What is the purpose of HTTPException in FastAPI?
+
+HTTPException is used to return HTTP error responses from a FastAPI application. It allows us to send an appropriate status code and an error message to the client when something goes wrong.
+
+Example
+if patient_found is None:
+    raise HTTPException(
+        status_code=404,
+        detail="Patient not found"
+    )
+
+
+    What is the purpose of BaseModel in Pydantic?
+
+    BaseModel is the base class provided by Pydantic. We inherit from it to create data models. It automatically validates data, converts compatible data types, provides serialization methods like model_dump(), and raises validation errors if the data is invalid. FastAPI uses these models to validate request and response data automatically.
+
+
+
+    What is the difference between model_dump() and model_dump_json()?
+
+    model_dump() converts a Pydantic model into a Python dictionary, while model_dump_json() converts a Pydantic model into a JSON string. We use model_dump() when we want to work with Python objects, and model_dump_json() when we need to send JSON data to an API or save it as JSON.
+
+
+    What is the purpose of exclude_unset=True in model_dump()?
+
+    exclude_unset=True is used with model_dump() to include only the fields that the user has provided. Fields that were not sent in the request are excluded. This prevents existing values from being overwritten with None or default values during an update operation.
+
+
+
+Q1. What is ASGI? How is it different from WSGI?
+
+WSGI (Web Server Gateway Interface) is the standard interface between a Python web application and a web server. It works with synchronous applications, meaning it handles one request at a time.
+
+ASGI (Asynchronous Server Gateway Interface) is the newer standard. It supports both synchronous and asynchronous applications. It can handle many requests efficiently using async and await, making it suitable for real-time applications like WebSockets, chat applications, and FastAPI.
+
+FastAPI uses ASGI because it supports asynchronous programming, which improves performance for I/O-bound tasks and allows handling many concurrent requests.
+
+
+FastAPI is called "Fast" because it provides high performance and fast development. It is built on Starlette and runs on ASGI, which supports asynchronous programming using async and await. This allows FastAPI to handle many concurrent requests efficiently. It also speeds up development by providing automatic data validation and API documentation.
+
+
+Why does FastAPI use type hints?
+
+FastAPI uses type hints to check whether the input data matches the expected data type, such as int or str. It also automatically converts compatible types, generates Swagger documentation, and provides better editor support.
+
+
+What is Dependency Injection?
+
+Dependency Injection means providing a function with the things it needs before it runs. In FastAPI, we use Depends() to automatically execute reusable code, such as authentication or database connections, before the endpoint is executed.
+
+
+What is Depends()?
+
+Depends() tells FastAPI to run another function before the API endpoint and automatically pass its result to the endpoint. It helps us reuse common code like authentication or database connections.
+
+What is the difference between Path, Query, and Body parameters in FastAPI?
+
+Path parameters are part of the URL and are used to identify a specific resource. Query parameters come after the ? in the URL and are used for filtering, searching, or sorting. Body parameters are sent in the HTTP request body, usually as JSON, and are used to send data such as creating or updating a resource.
+
+What is response_model?
+
+response_model defines what data the API should send back to the client. It validates the response and removes any fields that should not be returned, such as passwords.
+
+
+What is the difference between PUT and PATCH?
+
+PUT is used to replace an entire resource. If the resource does not exist, some APIs may create it. PATCH is used to partially update a resource, meaning only the fields provided in the request are modified.
+
+
+
+What is serialization and deserialization in FastAPI/Pydantic?
+
+Serialization is the process of converting a Pydantic model or Python object into JSON so it can be sent to the client. Deserialization is the process of converting JSON received from the client into a Pydantic model or Python object.
+
+
+What is the difference between synchronous (def) and asynchronous (async def) functions in FastAPI?
+
+A synchronous function (def) executes one task at a time and blocks while waiting for slow operations like database queries or API calls. An asynchronous function (async def) uses async and await so that while one task is waiting, FastAPI can handle other requests. This improves performance for I/O-bound operations.
+
+
+What is the difference between field_validator and model_validator in Pydantic?
+
+field_validator is used to validate a single field. It runs when that field is being processed. model_validator is used to validate multiple fields together or the entire model. It is useful when the validation depends on more than one field.
+
+What is CORS? Why do we use CORSMiddleware in FastAPI?
+
+CORS stands for Cross-Origin Resource Sharing. It is a security feature that controls which frontend websites can access the backend API. In FastAPI, we use CORSMiddleware to allow trusted frontend applications to communicate with the backend.
+
+
+CORS is used to allow the frontend to access the backend API. We use CORSMiddleware in FastAPI to specify which frontend websites are allowed to send requests to the backend.
+
+What is JWT (JSON Web Token)? Why do we use it?
+
+JWT stands for JSON Web Token. It is used for user authentication. After a user logs in successfully, the server generates a JWT and sends it to the client. The client sends this token with future requests, and the server verifies it to check whether the user is authenticated.
+
+
+
+JWT is used to identify a logged-in user. After login, the server gives a token to the user. The user sends that token with every request, and the server verifies it before allowing access.
+
+What is the difference between Authentication and Authorization?
+
+Authentication is the process of verifying a user's identity, such as by checking their email and password or JWT token. Authorization is the process of determining what an authenticated user is allowed to access or perform.
+
+
+
+What is an Access Token and a Refresh Token? Why do we need both?
+
+An access token is used to access protected APIs and has a short expiry time. A refresh token has a longer expiry time and is used to generate a new access token when the old one expires, allowing the user to stay logged in without entering their credentials again.
+
+
+Why do access tokens have a short expiry time instead of being valid forever?
+
+
+Access tokens have a short expiry time to improve security. If an access token is stolen, it can only be used for a limited time. The refresh token is then used to generate a new access token without requiring the user to log in again.
