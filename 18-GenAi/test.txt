@@ -1,0 +1,141 @@
+1. What is Prompt Engineering?
+
+Answer:
+
+Prompt engineering is the process of writing clear and effective instructions (prompts) to get accurate and useful responses from an AI model like ChatGPT or Gemini.
+
+2. What is Zero-Shot Prompting?
+
+Your code: Asking "Who is Modi?" directly without any examples.
+
+Answer:
+
+Zero-shot prompting means giving the AI a task without providing any examples. The model solves the task based on its pre-trained knowledge.
+
+Example:
+
+Translate "Hello" into Hindi.
+
+3. What is Chain-of-Thought Prompting?
+
+Your code asks the model to analyze, explain, solve, and return the answer step by step.
+
+Answer:
+
+Chain-of-thought prompting tells the AI to solve a problem step by step instead of giving only the final answer. This improves reasoning for complex problems.
+
+4. What is a System Prompt?
+
+Answer:
+
+A system prompt gives instructions to the AI about how it should behave throughout the conversation. It defines the AI's role, rules, and response style.
+
+Example:
+
+You are a helpful Python teacher.
+5. Why do we use a System Prompt?
+
+Answer:
+
+We use a system prompt to control the AI's behavior. It tells the model what role to play, what rules to follow, and how to format its responses.
+
+6. Why do we return JSON output?
+
+Your notes force JSON output.
+
+Answer:
+
+JSON output is structured and easy for applications to read and process. It helps backend programs extract specific fields like analysis or final_answer.
+
+7. What is response_mime_type="application/json"?
+
+Answer:
+
+It tells the AI model to return the response in valid JSON format instead of plain text.
+
+8. What is a Clarifying Question?
+
+Your notes ask one clarifying question if information is missing.
+
+Answer:
+
+A clarifying question is asked when the user's question does not have enough information to provide a correct answer.
+
+Example:
+
+User:
+
+I am 10 years older than my sister.
+
+AI:
+
+How old are you?
+9. What is Persona-Based Prompting?
+
+Your notes create a professor persona.
+
+Answer:
+
+Persona-based prompting means assigning a specific role or personality to the AI, such as a teacher, doctor, or interviewer, so that it responds in that style.
+
+10. Why do we use Persona-Based Prompting?
+
+Answer:
+
+We use persona-based prompting to make the AI respond in a specific tone or style according to the assigned role.
+
+11. What is Tool Calling?
+
+Your weather example demonstrates tool calling.
+
+Answer:
+
+Tool calling allows an AI model to use external functions or APIs to perform tasks that it cannot do by itself, such as checking the weather or performing calculations.
+
+12. Why do we need Tool Calling?
+
+Answer:
+
+We need tool calling because AI models cannot access real-time information or external systems on their own. Tool calling lets them use APIs and functions to get accurate and up-to-date information.
+
+13. What is an API?
+
+Answer:
+
+API stands for Application Programming Interface. It allows two applications to communicate and exchange data with each other.
+
+14. What is OpenWeather API?
+
+Your project uses it to fetch weather.
+
+Answer:
+
+OpenWeather API is a web service that provides real-time weather information such as temperature, humidity, wind speed, and weather conditions.
+
+15. Why do we use JSON in Tool Calling?
+
+Answer:
+
+JSON provides a structured format that makes it easy for the AI to specify which tool to call, what input to pass, and how to process the result.
+
+16. What is Ollama?
+
+Your notes use Ollama locally.
+
+Answer:
+
+Ollama is a tool that allows us to run large language models locally on our own computer without using cloud APIs.
+
+17. Why use Ollama?
+
+Answer:
+
+We use Ollama because it works offline, provides better privacy, avoids API costs, and is useful for local AI development.
+
+18. Why use FastAPI with Ollama?
+
+Your last program exposes Ollama through a FastAPI endpoint.
+
+Answer:
+
+FastAPI is used to create REST APIs. By connecting FastAPI with Ollama, we can expose the local AI model as an API that frontend or other applications can use.
