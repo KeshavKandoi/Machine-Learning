@@ -1,0 +1,51 @@
+What is RAG (Retrieval-Augmented Generation)?
+
+RAG (Retrieval-Augmented Generation) is a technique where an AI retrieves relevant information from external sources, such as PDFs, databases, or websites, and then uses that information to generate accurate answers. It helps the AI answer questions using data that was not part of its original training.
+
+Why do we need RAG? Why can't we just ask ChatGPT directly?
+
+We use RAG because an LLM does not know private or up-to-date information. RAG retrieves relevant information from external sources like PDFs, databases, or websites and provides it to the LLM, allowing it to generate accurate answers based on that data.
+
+
+Can you explain the complete RAG workflow step by step?
+
+First, we load the document using a document loader. Then the document is split into smaller chunks. Next, we create embeddings for each chunk and store them in a vector database. When the user asks a question, the question is also converted into an embedding. The vector database performs a similarity search and retrieves the most relevant chunks. These chunks are sent to the LLM as context, and the LLM generates the final answer.
+
+
+
+What is an embedding? Why do we create embeddings instead of storing plain text?
+
+An embedding is a numerical vector that represents the meaning of text. We create embeddings because AI and vector databases compare numerical vectors, not plain text. Similar texts have similar embeddings, which helps retrieve the most relevant information during similarity search.
+
+
+What is a vector database? Why can't we store embeddings in a normal SQL database like MySQL or PostgreSQL?
+
+A vector database is a database designed to store embeddings and perform fast similarity searches. Although embeddings can be stored in SQL databases, they are not optimized for vector similarity search. Vector databases like Qdrant are built to efficiently retrieve the most similar embeddings from large datasets.
+
+
+What is similarity search? How does Qdrant know which chunk is the most relevant?
+
+Similarity search is the process of comparing the embedding of the user's question with the embeddings stored in the vector database. The vector database finds the chunks with the highest similarity and returns their text. The LLM then uses this retrieved text as context to generate an accurate answer.
+
+
+What is the difference between an LLM and an embedding model?
+
+An embedding model converts text into numerical vectors that capture its meaning. These vectors are used for similarity search in a vector database. An LLM, on the other hand, takes text as input and generates human-readable text as output. In a RAG system, the embedding model helps retrieve relevant information, while the LLM uses that retrieved text to generate the final answer.
+
+
+Why do we split the document into chunks? Why can't we create one embedding for the entire PDF?
+ We split documents into smaller chunks because it improves retrieval accuracy. Each chunk gets its own embedding, allowing the vector database to find only the most relevant part of the document. If we create one embedding for the entire PDF, the embedding represents many different topics, making it difficult to retrieve precise information.
+
+
+ Suppose a user asks a question that is not present in the PDF. What will happen in your RAG application? How would you handle that situation?
+
+
+ If the user's question is not present in the PDF, the vector database may not find any relevant chunks. If we directly send the question to the LLM, it may answer using its own training knowledge, which can lead to hallucinations. A better approach is to check the similarity score and, if no relevant context is found, return a message like "The information is not available in the uploaded document."
+
+ What is hallucination in an LLM? How can RAG help reduce hallucinations?
+
+ Hallucination is when an LLM generates incorrect or made-up information and presents it as if it were true. In a RAG system, we can reduce hallucinations by retrieving relevant context from a vector database before generating the answer. We can also use a similarity score threshold and instruct the LLM to answer only from the retrieved context. If no relevant context is found, we should return a message saying the information is not available instead of guessing.
+
+ What is the difference between fine-tuning and RAG? Why would you choose RAG instead of fine-tuning?
+
+ Fine-tuning means further training a pre-trained model on domain-specific data so that it performs better for a particular task or domain. RAG, on the other hand, does not retrain the model. It retrieves relevant information from external documents and provides it to the LLM before generating an answer. I would choose RAG when the information changes frequently because updating documents is much easier than retraining the model.
