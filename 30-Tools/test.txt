@@ -1,0 +1,134 @@
+What is LangChain, and why do we use it?
+
+LangChain is an open-source framework for building applications powered by large language models (LLMs). It simplifies the development process by providing components such as prompt templates, document loaders, text splitters, embeddings, vector stores, retrievers, output parsers, tools, and agents. Without LangChain, developers would need to implement these features manually. A common real-world use case is a RAG application, where LangChain loads documents, splits them into chunks, creates embeddings, retrieves relevant information, and passes it to the LLM to generate accurate answers.
+
+
+What is the difference between an LLM and LangChain? Why can't we just use an LLM directly?
+
+An LLM is a model that understands natural language and generates text based on user input. LangChain is a framework that helps developers build LLM-powered applications by integrating the LLM with components like prompt templates, document loaders, text splitters, embeddings, vector stores, retrievers, tools, and output parsers. We can use an LLM directly for simple tasks such as text generation or summarization. However, for complex applications like RAG systems, AI agents, or document question answering, LangChain simplifies development by providing reusable building blocks instead of requiring us to implement everything manually.
+
+
+
+
+Suppose I don't use LangChain. Can I still build a RAG application? If yes, then why do people still use LangChain?
+
+
+Yes, we can build a RAG application without LangChain. However, we would need to manually implement every step, including document loading, text splitting, embedding generation, vector database integration, retrieval, prompt construction, and LLM interaction. LangChain provides reusable components and a standardized interface for all these tasks, reducing development time, improving code readability, and making applications easier to maintain and extend.
+
+
+What is a PromptTemplate?
+
+A PromptTemplate is a reusable prompt with placeholders (variables). Instead of writing a new prompt every time, we write one template and fill the placeholders with different values at runtime.
+
+What is input_variables?
+
+input_variables is a list of all the placeholders used in the template. It tells LangChain which values must be provided before generating the final prompt.
+
+
+A PromptTemplate is a reusable prompt with placeholders. input_variables tells LangChain which placeholders need values before creating the final prompt.
+
+
+What is the difference between PromptTemplate and ChatPromptTemplate?
+
+PromptTemplate is used to create a single text prompt with placeholders. It is useful when we want to reuse the same prompt by changing only a few values.
+
+ChatPromptTemplate is used for chat models. Instead of creating one text prompt, it creates a list of messages such as system, human, and AI messages. We use it when working with chat-based LLMs like ChatGPT or Gemini because these models accept conversations rather than a single text prompt.
+
+What is LCEL (LangChain Expression Language)?
+
+LCEL (LangChain Expression Language) is a simple way to connect different LangChain components using the | operator. The pipe operator passes the output of one component as the input to the next component. For example, prompt | model | parser means the PromptTemplate creates the prompt, the LLM generates the response, and the Output Parser converts the response into the required format. LCEL makes the code shorter, cleaner, and easier to read.
+
+
+
+What is the difference between RunnableSequence and LCEL?
+
+LCEL is the syntax used to connect LangChain components using the | operator. When we connect components using LCEL, LangChain internally creates a RunnableSequence, which executes each component one after another.
+
+RunnableParallel is a LangChain component that executes multiple runnables simultaneously. We use it when different tasks are independent of each other and can run at the same time, which improves performance. For example, if we want to summarize an article, translate it, and analyze its sentiment, we can run all three tasks in parallel instead of waiting for each one to finish before starting the next.
+
+
+What is RunnableBranch?
+
+RunnableBranch is used to execute different chains based on conditions. It evaluates the input and selects only one branch to execute. It is similar to an if-else statement in programming. For example, if a user asks an educational question, we can send it to an educational chain, and if they ask for translation, we can send it to a translation chain. Unlike RunnableParallel, which executes all branches simultaneously, RunnableBranch executes only the branch whose condition is satisfied.
+
+
+What is RunnableLambda?
+
+RunnableLambda is used to convert a normal Python function into a LangChain Runnable so that it can be used inside an LCEL chain. We use it for simple custom operations like formatting text, cleaning data, or modifying input before passing it to the next component. It is easier than creating a custom Runnable class for small tasks.
+
+
+What is an Output Parser?
+
+An Output Parser is a LangChain component that converts the LLM's response into a specific format, such as JSON, a Pydantic object, or another structured format. We use it when applications need consistent and machine-readable output instead of free-form text. For example, if an API expects JSON, an Output Parser ensures the LLM returns data in that format. Without an Output Parser, the LLM usually returns plain text, which is difficult for programs to process automatically.
+
+What is the difference between StrOutputParser, JsonOutputParser, and PydanticOutputParser?
+
+
+StrOutputParser is used when we need plain text output. JsonOutputParser is used when we need the response in JSON format so that applications can process it easily. PydanticOutputParser is used when we want the response to follow a predefined Pydantic schema with proper data types and validation.
+
+What is the difference between JsonOutputParser and Structured Output?
+
+JsonOutputParser is used when we want the LLM's response in JSON format. Structured Output is used when we want the response to follow a predefined schema with specific fields and data types. Structured Output provides stronger validation and more reliable results than simply asking the model to return JSON.
+
+What are Chains in LangChain?
+
+Chain in LangChain is a workflow that connects multiple components together, where the output of one component becomes the input of the next. We use chains to automate multi-step tasks instead of calling each component manually. For example, a chain can connect a PromptTemplate, an LLM, and an Output Parser to generate and format a response. By default, chains execute sequentially, and yes, a chain can contain multiple LangChain components.
+
+
+What is Memory in LangChain?
+
+Memory in LangChain is used to store conversation history or important user information so that the application can maintain context across interactions. We use memory to build conversational AI that remembers previous messages instead of treating every request as a new one. For example, if a user says, "My name is Keshav," the chatbot can remember it and answer correctly when the user later asks, "What is my name?" Without memory, the chatbot forgets previous conversations and cannot provide context-aware responses.
+
+
+What is a Vector Database?
+
+A Vector Database is a specialized database that stores vector embeddings instead of plain text. It is used for semantic similarity search. When a user asks a question, the query is converted into an embedding, and the vector database compares it with the stored embeddings to retrieve the most relevant information. This retrieved context is then passed to the LLM to generate an accurate response. Unlike SQL databases, which perform exact keyword matching, vector databases perform semantic similarity search. Popular vector databases include ChromaDB, FAISS, Pinecone, and Qdrant.
+
+What are Embeddings?
+
+Embeddings are numerical vector representations of text that capture its semantic meaning. We use embeddings because computers and vector databases compare numerical vectors more efficiently than raw text. An embedding model converts text into vectors, and similar texts produce similar vectors. This enables semantic search in applications like RAG. For example, the sentences "I love dogs" and "I like puppies" have different words but similar meanings, so their embeddings will be close to each other.
+
+Explain the complete RAG (Retrieval-Augmented Generation) pipeline from start to finish.
+
+RAG (Retrieval-Augmented Generation) is a technique that enables an LLM to answer questions using external knowledge instead of relying only on its training data. First, documents are loaded using document loaders and split into smaller chunks. These chunks are converted into vector embeddings using an embedding model and stored in a vector database. When a user asks a question, the query is converted into an embedding. The vector database performs semantic similarity search to retrieve the most relevant document chunks. These retrieved chunks are passed as additional context to the LLM, which then generates an accurate and context-aware response.
+
+What is a Document Loader in LangChain?
+
+
+A Document Loader in LangChain is a component used to load data from different file formats such as PDFs, text files, Word documents, CSV files, or web pages. It reads the file and converts its contents into LangChain Document objects, which can then be processed further by text splitters, embedding models, and vector databases. Common document loaders include PyPDFLoader, TextLoader, CSVLoader, WebBaseLoader, and DirectoryLoader. For example, if we build a chatbot that answers questions from a company's HR policy PDF, we first use PyPDFLoader to load the document into LangChain.
+
+
+What is the Document object in LangChain?
+A Document object is the standard data structure used by LangChain to represent loaded documents. It contains two main attributes: page_content, which stores the document text, and metadata, which stores additional information such as the file name, page number, or source. LangChain uses Document objects instead of plain strings because metadata helps track where the content came from and is useful during retrieval and citation.
+
+Document
+│
+├── page_content → Actual text
+│
+└── metadata → Information about the text
+
+
+What is the difference between load(), lazy_load(), and aload() in LangChain Document Loaders?
+
+load() reads the entire document and returns all Document objects at once. lazy_load() returns documents one at a time using an iterator, making it memory-efficient for large files. aload() is the asynchronous version of load(), allowing the document to be loaded without blocking other asynchronous tasks.
+
+
+Suppose loading a PDF takes 10 seconds, and during those 10 seconds your FastAPI application receives 50 new user requests.
+
+What happens if you use load()?
+What happens if you use aload()?
+
+
+No. aload() does not reduce the loading time. It allows the application to perform other asynchronous tasks while waiting for the loading operation to complete, making the application more responsive.
+
+
+What is the difference between PyPDFLoader and UnstructuredPDFLoader?
+PyPDFLoader is used to load standard text-based PDF files and is fast and lightweight. UnstructuredPDFLoader is designed for more complex PDFs, such as scanned documents, PDFs with tables, images, or irregular layouts. I would use PyPDFLoader for normal digital PDFs and UnstructuredPDFLoader when dealing with complex document structures.
+
+What is WebBaseLoader?
+
+WebBaseLoader is a LangChain document loader used to load text content from web pages using a URL. It fetches the webpage, extracts the text, and returns it as Document objects with metadata. It is commonly used for RAG applications where we want to retrieve information from websites such as Wikipedia, blogs, or documentation before sending the relevant content to the LLM.
+
+
+What is DirectoryLoader?
+DirectoryLoader is used to load all supported files from a directory instead of loading each file individually. It is useful when working with multiple documents stored in the same folder, such as PDFs, text files, or CSV files. It returns a list of Document objects, which can then be processed further using text splitters, embeddings, and vector databases.
